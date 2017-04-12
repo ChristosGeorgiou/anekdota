@@ -16,14 +16,20 @@
             <p>{{joke.added| amTimeAgo}}</p>
             <ion-badge item-right *ngIf="joke.isNew">NEW</ion-badge>
           </button>
+          <ion-item>
+            <button ion-button clear item-right icon-right>
+              περισσοτερα
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
+      <ion-col col-sm-6>
         <ion-list style="margin-bottom:1rem;">
           <ion-list-header>
-            <ion-icon name="thumbs-up"></ion-icon> Τα καλυτερα
+            <ion-icon name="thumbs-up"></ion-icon> καλυτερα
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
             <h2>{{joke.text}}</h2>
@@ -31,10 +37,10 @@
           </button>
         </ion-list>
       </ion-col>
-      <ion-col col-6>
+      <ion-col col-sm-6>
         <ion-list style="margin-bottom:1rem;">
           <ion-list-header>
-            <ion-icon name="thumbs-down"></ion-icon> Τα χειροτερα
+            <ion-icon name="thumbs-down"></ion-icon> χειροτερα
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
             <h2>{{joke.text}}</h2>
@@ -47,7 +53,7 @@
       <ion-col col-12>
         <ion-list style="margin-bottom:1rem;">
           <ion-list-header>
-            <ion-icon name="list-box"></ion-icon> ολες κατηγοριες
+            <ion-icon name="list-box"></ion-icon> κατηγοριες
           </ion-list-header>
           <button ion-item *ngFor="let category of categories" [navPush]="categoryPage" [navParams]="category">
             <ion-thumbnail item-left>

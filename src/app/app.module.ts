@@ -37,7 +37,14 @@ import { JokePage } from './joke/joke.component';
     BrowserModule,
     HttpModule,
     MomentModule,
-    IonicModule.forRoot(MyApp, { scrollAssist: false, autoFocusAssist: false })
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'πίσω',
+      // iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      // tabsPlacement: 'bottom',
+      // pageTransition: 'ios-transition'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
