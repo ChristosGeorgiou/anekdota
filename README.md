@@ -1,6 +1,8 @@
 Ionic 2 App Base
 =====================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ChristosGeorgiou/anekdota.svg)](https://greenkeeper.io/)
+
 This is the base template for Ionic 2 starter apps.
 
 ## Using this project
