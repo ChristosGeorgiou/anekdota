@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{joke.text}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content style="font-size:2rem;">
+      {{joke.text}}
+      <hr>
+      <ion-note>
+        <div>{{joke.added| amTimeAgo}} - {{joke.points}} ποντους</div>
+      </ion-note>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-left>
+        <ion-icon name="arrow-back"></ion-icon>
+        προηγουμενο
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-right>
+        επομενο
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

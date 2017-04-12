@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>ΑΝΕΚΔΟΤΑ</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid style="padding:0;">
+    <ion-row>
+      <ion-col col-12>
+        <ion-list style="margin-bottom:1rem;">
+          <ion-list-header>
+            <ion-icon name="pulse"></ion-icon> Τελευταια
+          </ion-list-header>
+          <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
+            <h2>{{joke.text}}</h2>
+            <p>{{joke.added| amTimeAgo}}</p>
+            <ion-badge item-right *ngIf="joke.isNew">NEW</ion-badge>
+          </button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-list style="margin-bottom:1rem;">
+          <ion-list-header>
+            <ion-icon name="thumbs-up"></ion-icon> Τα καλυτερα
+          </ion-list-header>
+          <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
+            <h2>{{joke.text}}</h2>
+            <p>{{joke.points}} ποντους</p>
+          </button>
+        </ion-list>
+      </ion-col>
+      <ion-col col-6>
+        <ion-list style="margin-bottom:1rem;">
+          <ion-list-header>
+            <ion-icon name="thumbs-down"></ion-icon> Τα χειροτερα
+          </ion-list-header>
+          <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
+            <h2>{{joke.text}}</h2>
+            <p>{{joke.points}} ποντους</p>
+          </button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list style="margin-bottom:1rem;">
+          <ion-list-header>
+            <ion-icon name="list-box"></ion-icon> ολες κατηγοριες
+          </ion-list-header>
+          <button ion-item *ngFor="let category of categories" [navPush]="categoryPage" [navParams]="category">
+            <ion-thumbnail item-left>
+              <img [src]="category.image">
+            </ion-thumbnail>
+            <h2>{{category.title}}</h2>
+            <p>{{category.count}}</p>
+          </button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
