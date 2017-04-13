@@ -4,6 +4,7 @@ import { Nav, Platform } from 'ionic-angular';
 import * as Raven from 'raven-js';
 
 import { MainPage } from './main/main.component';
+import { DataService } from './data.service';
 
 //enableProdMode();
 
@@ -15,10 +16,11 @@ export class MyApp {
 
   rootPage: any = MainPage;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public dataService: DataService) {
     this.platform
       .ready()
       .then(() => {
+        this.dataService.initDB();
         Raven.setRelease("0.0.0");
       });
   }

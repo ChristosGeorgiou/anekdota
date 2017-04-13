@@ -1,3 +1,4 @@
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 export class Category {
     public image: string;
     public title: string;
@@ -5,9 +6,10 @@ export class Category {
 }
 
 export class Joke {
-    public text: string;
+    public content: Array<string>;
     public points: number;
-    public added: string;
+    public date: string;
+    public tags: Array<string>;
     public isNew?: boolean;
 
     constructor() {

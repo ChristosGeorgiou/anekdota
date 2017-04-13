@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { App } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
+
 import { Category, Joke } from '../models';
 import { CategoryPage } from '../category/category.component';
 import { JokePage } from '../joke/joke.component';
+
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'page-main',
   templateUrl: 'main.html'
 })
-export class MainPage {
+export class MainPage implements OnInit {
   public jokes: { [name: string]: Array<Joke> } = {};
   public categories: Array<Category>;
   public categoryPage: any;
   public jokePage: any;
 
-  constructor(private app: App) {
+  constructor(public platform: Platform, private app: App, private dbService: DataService) {
     this.categoryPage = CategoryPage;
     this.jokePage = JokePage;
     this.categories = [
@@ -24,24 +28,23 @@ export class MainPage {
         count: 1,
       }
     ];
+  }
 
-    this.jokes.latest = [
-      {
-        text: "Έχω μια περίεργη αισιοδοξία σήμερα. Θα δω ειδήσεις να μου περάσει...",
-        points: 1,
-        added: "2017-01-01",
-        isNew: true,
-      },
-      {
-        text: "Όταν μου λένε πως κάποιος είναι μισός Έλληνας μισός Σουηδός, φαντάζομαι έναν οδηγό που σταματάει για να περάσει πεζός ενώ ταυτόχρονα τον μουντζώνει...",
-        points: 1,
-        added: "2017-02-01",
-      },
-      {
-        text: "Χθες λιποθύμησα στο κρεβάτι για καμιά δεκαριά ώρες. Μάτι θα ήτανε.",
-        points: 1,
-        added: "2017-03-01",
-      },
-    ]
+  public ngOnInit() {
+    this.platform
+      .ready()
+      .then(() => {
+        this.dbService.db
+          .allDocs({ include_docs: true })
+          .then((docs) => {
+            this.jokes = {
+              latest: []
+            }
+            for (let entry of docs.rows) {
+              this.jokes.latest.push(entry.doc); // 1, "string", false
+            }
+            console.log(this.jokes.latest)
+          })
+      })
   }
 }

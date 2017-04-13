@@ -12,8 +12,10 @@
             <ion-icon name="pulse"></ion-icon> Τελευταια
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
-            <h2>{{joke.text}}</h2>
-            <p>{{joke.added| amTimeAgo}}</p>
+            <h2>{{joke.content[0]}}</h2>
+            <p>{{joke.date| amTimeAgo}} -
+              <span class="joke-tag" *ngFor="let tag of joke.tags">{{tag}}</span>
+            </p>
             <ion-badge item-right *ngIf="joke.isNew">NEW</ion-badge>
           </button>
           <ion-item>
@@ -32,7 +34,7 @@
             <ion-icon name="thumbs-up"></ion-icon> καλυτερα
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
-            <h2>{{joke.text}}</h2>
+            <h2>{{joke.content[0]}}</h2>
             <p>{{joke.points}} ποντους</p>
           </button>
         </ion-list>
@@ -43,7 +45,7 @@
             <ion-icon name="thumbs-down"></ion-icon> χειροτερα
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
-            <h2>{{joke.text}}</h2>
+            <h2>{{joke.content[0]}}</h2>
             <p>{{joke.points}} ποντους</p>
           </button>
         </ion-list>
