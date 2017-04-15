@@ -18,7 +18,7 @@ export class MainPage implements OnInit {
   public categoryPage: any;
   public jokePage: any;
 
-  constructor(public platform: Platform, private app: App, private dbService: DataService) {
+  constructor(public platform: Platform, private app: App, private dataService: DataService) {
     this.categoryPage = CategoryPage;
     this.jokePage = JokePage;
     this.categories = [
@@ -31,20 +31,11 @@ export class MainPage implements OnInit {
   }
 
   public ngOnInit() {
-    this.platform
-      .ready()
-      .then(() => {
-        this.dbService.db
-          .allDocs({ include_docs: true })
-          .then((docs) => {
-            this.jokes = {
-              latest: []
-            }
-            for (let entry of docs.rows) {
-              this.jokes.latest.push(entry.doc); // 1, "string", false
-            }
-            console.log(this.jokes.latest)
-          })
+    this.dataService
+      .jokes
+      .subscribe((j) => {
+        this.jokes.latest.push(j)
       })
+    console.log(this.jokes)
   }
 }

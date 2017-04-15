@@ -20,7 +20,7 @@ export class MyApp {
     this.platform
       .ready()
       .then(() => {
-        this.dataService.initDB();
+        this.dataService.init();
         Raven.setRelease("0.0.0");
       });
   }

@@ -1,18 +1,41 @@
+import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import * as PouchDB from 'pouchdb';
-import cordovaSqlitePlugin from 'pouchdb-adapter-cordova-sqlite';
+
+import { Joke } from "./models";
 
 @Injectable()
 export class DataService {
-  public db: any = {};
+
+  public _db: any = {};
+  public jokes: Observable<Joke> = new Observable(null);
+
   constructor(private http: Http) { }
 
-  initDB() {
-    PouchDB.plugin(cordovaSqlitePlugin);
-    this.db = new PouchDB('database.db');//, { adapter: 'cordova-sqlite' });
-    var remoteDB = new PouchDB('http://192.168.1.200:5984/anekdota');
-    this.db.replicate.from(remoteDB);
+  public init() {
+    // PouchDB.plugin(cordovaSqlitePlugin);
+    this._db = new PouchDB('database2.db');//, { adapter: 'cordova-sqlite' });
+
+    setTimeout(() => {
+      this.sync();
+    })
+
+    this.sync();
+  }
+
+  public sync() {
+    var remoteDB = new PouchDB('http://couchdb.cgeosoft.com:5984/anekdota');
+    return this._db
+      .replicate
+      .from(remoteDB)
+      .then(() => {
+        this._db
+          .allDocs({ include_docs: true })
+          .then((docs) => {
+            this.jokes = docs.map(j => j.doc);
+          })
+      })
   }
 }
