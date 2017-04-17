@@ -1,15 +1,22 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>ΑΝΕΚΔΟΤΑ</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>
+      <ion-icon name="happy"></ion-icon>
+      ΑΝΕΚΔΟΤΑ
+      <ion-icon name="happy"></ion-icon>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid style="padding:0;">
     <ion-row>
       <ion-col col-12>
         <ion-list style="margin-bottom:1rem;">
           <ion-list-header>
-            <ion-icon name="pulse"></ion-icon> Τελευταια
+            <ion-icon name="pulse"></ion-icon> προσφατα
           </ion-list-header>
           <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
             <h2>{{joke.content[0]}}</h2>
@@ -33,9 +40,11 @@
           <ion-list-header>
             <ion-icon name="thumbs-up"></ion-icon> καλυτερα
           </ion-list-header>
-          <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
+          <button ion-item *ngFor="let joke of jokes.best" [navPush]="jokePage" [navParams]="joke">
             <h2>{{joke.content[0]}}</h2>
-            <p>{{joke.points}} ποντους</p>
+            <p>{{joke.points}} ποντους -
+              <span class="joke-tag" *ngFor="let tag of joke.tags">{{tag}}</span>
+            </p>
           </button>
         </ion-list>
       </ion-col>
@@ -44,9 +53,11 @@
           <ion-list-header>
             <ion-icon name="thumbs-down"></ion-icon> χειροτερα
           </ion-list-header>
-          <button ion-item *ngFor="let joke of jokes.latest" [navPush]="jokePage" [navParams]="joke">
+          <button ion-item *ngFor="let joke of jokes.worst" [navPush]="jokePage" [navParams]="joke">
             <h2>{{joke.content[0]}}</h2>
-            <p>{{joke.points}} ποντους</p>
+            <p>{{joke.points}} ποντους -
+              <span class="joke-tag" *ngFor="let tag of joke.tags">{{tag}}</span>
+            </p>
           </button>
         </ion-list>
       </ion-col>

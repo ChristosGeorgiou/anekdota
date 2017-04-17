@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-
+import *  as _ from 'lodash';
 import * as PouchDB from 'pouchdb';
 
 import { Joke } from "./models";
@@ -10,31 +10,29 @@ import { Joke } from "./models";
 export class DataService {
 
   public _db: any = {};
-  public jokes: Observable<Joke> = new Observable(null);
+  public remoteDB: any = {};
+  public jokes: Array<Joke>;
 
-  constructor(private http: Http) { }
-
-  public init() {
+  constructor(private http: Http) {
     // PouchDB.plugin(cordovaSqlitePlugin);
     this._db = new PouchDB('database2.db');//, { adapter: 'cordova-sqlite' });
-
-    setTimeout(() => {
-      this.sync();
-    })
-
-    this.sync();
+    this.remoteDB = new PouchDB('http://couchdb.cgeosoft.com:5984/anekdota');
   }
 
   public sync() {
-    var remoteDB = new PouchDB('http://couchdb.cgeosoft.com:5984/anekdota');
     return this._db
       .replicate
-      .from(remoteDB)
+      .from(this.remoteDB)
       .then(() => {
-        this._db
+        return this._db
           .allDocs({ include_docs: true })
-          .then((docs) => {
-            this.jokes = docs.map(j => j.doc);
+          .then((data) => {
+            this.jokes = _
+              .chain(data.rows)
+              .map((i: any) => {
+                return i.doc;
+              })
+              .value();
           })
       })
   }

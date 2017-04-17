@@ -1,31 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{joke.text}}</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>{{joke.content[0]}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-card>
-    <ion-card-content style="font-size:2rem;">
-      {{joke.text}}
+    <ion-card-content>
+      <div style="padding:2rem 1rem;">
+        <p style="font-size:2.5rem;" *ngFor="let part of joke.content">{{part}}</p>
+      </div>
       <hr>
       <ion-note>
-        <div>{{joke.added| amTimeAgo}} - {{joke.points}} ποντους</div>
+        <span class="joke-tag" *ngFor="let tag of joke.tags">{{tag}}</span>
+        <br> {{joke.date| amTimeAgo}} - {{joke.points}} ποντους
       </ion-note>
     </ion-card-content>
   </ion-card>
-</ion-content>
+  <div padding>
+    <button ion-button icon-left round outline>
+      <ion-icon name="share"></ion-icon> ΑΠΟΣΤΟΛΗ
+    </button>
 
+    <button ion-button icon-only clear color="danger">
+      <ion-icon name="alert"></ion-icon>
+    </button>
+  </div>
+</ion-content>
 <ion-footer>
   <ion-toolbar>
     <ion-buttons start>
-      <button ion-button icon-left>
+      <button ion-button icon-left color="dark">
         <ion-icon name="arrow-back"></ion-icon>
-        προηγουμενο
+        ΠΡΟΗΓΟΥΜΕΝΟ
       </button>
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-right>
-        επομενο
+        ΕΠΟΜΕΝΟ
         <ion-icon name="arrow-forward"></ion-icon>
       </button>
     </ion-buttons>

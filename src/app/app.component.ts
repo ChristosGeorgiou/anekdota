@@ -14,13 +14,13 @@ import { DataService } from './data.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MainPage;
+  rootPage: any// = MainPage;
 
-  constructor(public platform: Platform, public dataService: DataService) {
+  constructor(public platform: Platform) {
     this.platform
       .ready()
       .then(() => {
-        this.dataService.init();
+        this.rootPage = MainPage;
         Raven.setRelease("0.0.0");
       });
   }

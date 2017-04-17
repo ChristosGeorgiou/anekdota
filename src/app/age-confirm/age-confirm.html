@@ -1,0 +1,15 @@
+<ion-content padding>
+  <h1 text-center>
+    <ion-icon color="danger" name="ios-alert-outline" style="font-size:7rem;margin:2rem 0 1rem"></ion-icon>
+    <br> Επιβεβαίωση Ηλικίας
+  </h1>
+  <ion-card>
+    <ion-card-content>
+      Μερικά ανέκδοτα περιέχουν θέματα ακατάλληλα για ανήλικους. Παρακαλώ επιλέξτε μια απο τις παρακάτω επιλογές για να συνεχισετε.
+    </ion-card-content>
+  </ion-card>
+  <p text-center>
+    <button ion-button round outline (click)="confirm('I_AM_ADULT')">Είμαι πάνω απο 18 χρονών</button>
+    <button ion-button round outline color="dark" (click)="confirm('I_AM_NOT_ADULT')">Είμαι κάτω απο 18 χρονών</button>
+  </p>
+</ion-content>
