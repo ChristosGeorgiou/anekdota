@@ -18,3 +18,13 @@
   padding: 2px 5px;
   margin: 0 5px 0 0;
 }
+
+.nsfw-badge {
+  position: absolute;
+  top: 1rem;
+  right: 0rem;
+  background: #F00;
+  color: #FFF;
+  padding: .2rem 1rem;
+  border-radius: 1rem 0 0 1rem;
+}

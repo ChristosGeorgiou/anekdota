@@ -6,6 +6,7 @@ export class Category {
 }
 
 export class Joke {
+    public _id: string;
     public content: Array<string>;
     public points: number;
     public date: string;
